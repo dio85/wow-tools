@@ -11,10 +11,10 @@
 
 struct FileVersionInfo
 {
-    WORD FileMajorPart;
-    WORD FileMinorPart;
-    WORD FileBuildPart;
-    WORD FilePrivatePart;
+    DWORD FileMajorPart;
+    DWORD FileMinorPart;
+    DWORD FileBuildPart;
+    DWORD FilePrivatePart;
 
     void Init(DWORD ms, DWORD ls)
     {

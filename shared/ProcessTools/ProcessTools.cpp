@@ -137,4 +137,13 @@ void ProcessTools::GetFileVersion(TCHAR const* path, FileVersionInfo* info)
 
     info->Init(fileInfo->dwFileVersionMS, fileInfo->dwFileVersionLS);
     delete[] buffer;
+
+    if (info->FileMajorPart > 12)
+        *info =
+        {
+            .FileMajorPart = info->FileMajorPart / 100,
+            .FileMinorPart = info->FileMajorPart % 100,
+            .FileBuildPart = info->FileMinorPart,
+            .FilePrivatePart = info->FileBuildPart * 10 + info->FilePrivatePart
+        };
 }
