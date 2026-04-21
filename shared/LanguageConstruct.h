@@ -2,12 +2,13 @@
 #ifndef LanguageConstruct_h__
 #define LanguageConstruct_h__
 
-#include <cstdint>
-#include <string>
-#include <sstream>
-#include <list>
 #include <algorithm>
+#include <cstdint>
+#include <list>
 #include <memory>
+#include <sstream>
+#include <string>
+#include <string_view>
 
 template<class MemberType>
 class LanguageConstruct
@@ -16,21 +17,17 @@ public:
     typedef MemberType Member;
 
     LanguageConstruct() { }
-    LanguageConstruct(std::string const& name) : _name(name) { }
+    LanguageConstruct(std::string_view name) : _name(name) { }
 
-    void SetName(std::string const& name) { _name = name; }
+    void SetName(std::string_view name) { _name = name; }
     void AddMember(Member&& member) { _members.push_back(std::move(member)); }
     void AddMemberSorted(Member&& member) { _members.push_back(std::move(member)); _members.sort(); }
 
-    std::string const& GetName() const { return _name; }
+    std::string_view GetName() const { return _name; }
     std::list<Member> const& GetMembers() const { return _members; }
-    Member const* GetMember(std::string const& memberName) const
+    Member const* GetMember(std::string_view memberName) const
     {
-        auto itr = std::find_if(_members.begin(), _members.end(), [&memberName](Member const& member)
-        {
-            return member.ValueName == memberName;
-        });
-
+        auto itr = std::ranges::find(_members, memberName, &Member::ValueType);
         if (itr != _members.end())
             return &(*itr);
 

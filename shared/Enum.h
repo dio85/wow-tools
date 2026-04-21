@@ -6,10 +6,10 @@
 
 struct EnumMember
 {
-    EnumMember(std::uint32_t ordinal, std::string const& name, std::string const& comment)
+    EnumMember(std::uint32_t ordinal, std::string_view name, std::string_view comment)
         : Offset(ordinal), ValueName(name), Value(std::to_string(ordinal)), Comment(comment) { }
 
-    EnumMember(std::uint32_t ordinal, std::string const& value, std::string const& name, std::string const& comment)
+    EnumMember(std::uint32_t ordinal, std::string_view value, std::string_view name, std::string_view comment)
         : Offset(ordinal), ValueName(name), Value(value), Comment(comment) { }
 
     std::uint32_t Offset;
@@ -26,7 +26,7 @@ class Enum : public LanguageConstruct<EnumMember>
 
 public:
     Enum() : _paddingAfterName(0) { }
-    Enum(std::string const& name) : Base(name), _paddingAfterName(0) { }
+    Enum(std::string_view name) : Base(name), _paddingAfterName(0) { }
 
     void SetPaddingAfterValueName(std::uint32_t padding) { _paddingAfterName = padding; }
     std::uint32_t GetPadding() const { return _paddingAfterName; }

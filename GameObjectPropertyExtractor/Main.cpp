@@ -261,8 +261,18 @@ int main(int argc, char* argv[])
             "        {\n";
 
         for (std::size_t bit = 0; bit < GameObjectPropertyInfo::MAX_GAMEOBJECT_TYPE; ++bit)
+        {
             if (itr->second[bit])
-                valueName = valueName + "            case " + TCEnumName[bit] + ": return " + typeStructures[bit].GetName() + '.' + itr->first + ";\n";
+            {
+                valueName += "            case ";
+                valueName += TCEnumName[bit];
+                valueName += ": return ";
+                valueName += typeStructures[bit].GetName();
+                valueName += '.';
+                valueName += itr->first;
+                valueName += ";\n";
+            }
+        }
 
         valueName +=
             "            default: return " + std::to_string(propDefaults[itr->first]) + ";\n"

@@ -30,7 +30,7 @@ void DumpEnum(Enum const& enumData, std::string const& fileNameBase)
     dump << SourceOutput<Enum>(std::make_unique<IdcEnum>(), enumData, 0);
 }
 
-void DumpUIErrors(std::shared_ptr<Process> wow)
+void DumpUIErrors(Process& wow)
 {
     static std::uintptr_t const UIErrorsOffset = 0x3D53790;
     static std::size_t const UIErrorsSize = 1236;
@@ -38,10 +38,10 @@ void DumpUIErrors(std::shared_ptr<Process> wow)
     Enum uiErrors;
     uiErrors.SetName("class GameError");
     uiErrors.SetPaddingAfterValueName(64);
-    std::vector<UIErrorInfo> errors = wow->ReadArray<UIErrorInfo>(UIErrorsOffset, UIErrorsSize);
+    std::vector<UIErrorInfo> errors = wow.ReadArray<UIErrorInfo>(UIErrorsOffset, UIErrorsSize);
     for (std::size_t i = 0; i < errors.size(); ++i)
     {
-        std::string error = wow->Read<std::string>(errors[i].ErrorName);
+        std::string error = wow.Read<std::string>(errors[i].ErrorName);
         if (!error.empty())
             uiErrors.AddMember(Enum::Member(std::uint32_t(i), error, ""));
     }
@@ -67,7 +67,7 @@ struct WowCS_FragmentDefinition
     bool IsTag() const { return StorageType == 4; }
 };
 
-void DumpWowCSData(std::shared_ptr<Process> wow)
+void DumpWowCSData(Process& wow)
 {
     static std::uintptr_t const FragmentsOffset = 0x3E8CBF0;
     static std::size_t const FragmentsSize = 256;
@@ -77,7 +77,7 @@ void DumpWowCSData(std::shared_ptr<Process> wow)
     Enum fragmentsEnum;
     fragmentsEnum.SetName("WowCSEntityFragments");
     fragmentsEnum.SetPaddingAfterValueName(28);
-    std::vector<WowCS_FragmentDefinition> fragments = wow->ReadArray<WowCS_FragmentDefinition>(FragmentsOffset, FragmentsSize);
+    std::vector<WowCS_FragmentDefinition> fragments = wow.ReadArray<WowCS_FragmentDefinition>(FragmentsOffset, FragmentsSize);
     for (std::size_t i = 0; i < fragments.size(); ++i)
     {
         WowCS_FragmentDefinition const& fragment = fragments[i];
@@ -96,7 +96,7 @@ void DumpWowCSData(std::shared_ptr<Process> wow)
         if (fragment.IsTag())
             comment += " TAG,";
 
-        fragmentsEnum.AddMember(Enum::Member(i, wow->Read<std::string>(fragment.Name), comment));
+        fragmentsEnum.AddMember(Enum::Member(i, wow.Read<std::string>(fragment.Name), comment));
     }
 
     out << SourceOutput<Enum>(std::make_unique<CppEnum>("uint32"), fragmentsEnum, 0);
@@ -108,7 +108,7 @@ int main()
     if (!wow)
         return 1;
 
-    DumpUIErrors(wow);
-    DumpWowCSData(wow);
+    DumpUIErrors(*wow);
+    DumpWowCSData(*wow);
     return 0;
 }

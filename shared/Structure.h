@@ -6,7 +6,7 @@
 
 struct StructureMember
 {
-    StructureMember(std::uint32_t ordinal, std::string const& type, std::string const& name, std::string const& comment, bool isFunction = false)
+    StructureMember(std::uint32_t ordinal, std::string_view type, std::string_view name, std::string_view comment, bool isFunction = false)
         : Offset(ordinal), TypeName(type), ValueName(name), Comment(comment), IsFunction(isFunction) { }
 
     std::uint32_t Offset;
@@ -21,15 +21,15 @@ struct StructureMember
 class Structure : public LanguageConstruct<StructureMember>
 {
 public:
-    void SetComment(std::string const& comment) { _comment = comment; }
+    void SetComment(std::string_view comment) { _comment = comment; }
     void SetValueCommentPadding(std::uint32_t cp) { _valueCommentPadding = cp; }
 
-    std::string const& GetComment() const { return _comment; }
+    std::string_view GetComment() const { return _comment; }
     std::uint32_t GetValueCommentPadding() const { return _valueCommentPadding; }
 
 private:
     std::string _comment;
-    std::uint32_t _valueCommentPadding;
+    std::uint32_t _valueCommentPadding = 0;
 };
 
 class CppStruct : public Formatter<Structure>
