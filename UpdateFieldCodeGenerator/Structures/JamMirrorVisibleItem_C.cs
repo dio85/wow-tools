@@ -9,7 +9,9 @@
         public static readonly UpdateField m_conditionalItemAppearanceID = new UpdateField(typeof(int), UpdateFieldFlag.None);
         public static readonly UpdateField m_itemAppearanceModID = new UpdateField(typeof(ushort), UpdateFieldFlag.None);
         public static readonly UpdateField m_itemVisual = new UpdateField(typeof(ushort), UpdateFieldFlag.None);
-        public static readonly UpdateField m_field_10 = new UpdateField(typeof(bool), UpdateFieldFlag.None);
-        public static readonly UpdateField m_field_11 = new UpdateField(typeof(bool), UpdateFieldFlag.None);
+        public static readonly UpdateField m_hasTransmog = new UpdateField(typeof(bool), UpdateFieldFlag.None);
+        public static readonly UpdateField m_hasIllusion = new UpdateField(typeof(bool), UpdateFieldFlag.None);
+        public static readonly UpdateField m_itemModifiedAppearanceID = new UpdateField(typeof(uint), UpdateFieldFlag.None);
+        public static readonly UpdateField m_transmogSlotOption = new UpdateField(typeof(byte), UpdateFieldFlag.None);
     }
 }

@@ -120,7 +120,7 @@ namespace UpdateFieldCodeGenerator.Structures
         public static readonly UpdateField houseThemes = new UpdateField(typeof(DynamicUpdateField<uint>), UpdateFieldFlag.None);
         public static readonly UpdateField houseRoomComponentTextures = new UpdateField(typeof(DynamicUpdateField<uint>), UpdateFieldFlag.None);
         public static readonly UpdateField houseTypes = new UpdateField(typeof(DynamicUpdateField<uint>), UpdateFieldFlag.None);
-        public static readonly UpdateField field_1980 = new UpdateField(typeof(DynamicUpdateField<int>), UpdateFieldFlag.None);
+        public static readonly UpdateField unlockedTransmogOutfits = new UpdateField(typeof(DynamicUpdateField<int>), UpdateFieldFlag.None);
         public static readonly UpdateField characterRestrictions = new UpdateField(typeof(DynamicUpdateField<JamMirrorCharacterRestriction_C>), UpdateFieldFlag.None);
         public static readonly UpdateField spellPctModByLabel = new UpdateField(typeof(DynamicUpdateField<JamMirrorSpellPctModByLabel_C>), UpdateFieldFlag.None);
         public static readonly UpdateField spellFlatModByLabel = new UpdateField(typeof(DynamicUpdateField<JamMirrorSpellFlatModByLabel_C>), UpdateFieldFlag.None);

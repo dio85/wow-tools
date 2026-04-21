@@ -13,6 +13,7 @@ namespace UpdateFieldCodeGenerator.Structures
         public static readonly UpdateField m_progress = new UpdateField(typeof(uint), UpdateFieldFlag.None);
         public static readonly UpdateField m_lines = new UpdateField(typeof(BlzVectorField<JamMirrorConversationLine_C>), UpdateFieldFlag.None);
         public static readonly UpdateField m_dontPlayBroadcastTextSounds = new UpdateField(typeof(bool), UpdateFieldFlag.None, bitSize: 1);
+        public static readonly UpdateField m_field_33 = new UpdateField(typeof(bool), UpdateFieldFlag.None, bitSize: 1, comment: "UNK: Prevents line lookup from succeeding");
         public static readonly UpdateField m_actors = new UpdateField(typeof(DynamicUpdateField<JamMirrorConversationActor_C>), UpdateFieldFlag.None);
         public static readonly UpdateField m_flags = new UpdateField(typeof(uint), UpdateFieldFlag.None);
     }

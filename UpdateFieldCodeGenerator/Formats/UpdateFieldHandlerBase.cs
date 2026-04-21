@@ -528,15 +528,8 @@ namespace UpdateFieldCodeGenerator.Formats
             {
                 if (_create)
                 {
-                    var dontPlayBroadcastTextSoundsIndex = _fieldWrites.FindIndex(fw => fw.Name == RenameField("m_dontPlayBroadcastTextSounds"));
-                    var actorsSizeIndex = _fieldWrites.FindIndex(fw => fw.Name == RenameField("m_actors") && fw.IsSize);
-                    if (actorsSizeIndex != -1)
-                    {
-                        // move to just-before-end (end is a write for closing all brackets)
-                        var dontPlayBroadcastTextSounds = _fieldWrites[dontPlayBroadcastTextSoundsIndex];
-                        _fieldWrites.RemoveAt(dontPlayBroadcastTextSoundsIndex);
-                        _fieldWrites.Insert(actorsSizeIndex, dontPlayBroadcastTextSounds);
-                    }
+                    moveFieldBeforeField("m_dontPlayBroadcastTextSounds", false, "m_actors", true);
+                    moveFieldBeforeField("m_field_33", false, "m_actors", true);
                 }
             }
             else if (_structureType == typeof(CGMeshObjectData))
